@@ -1,10 +1,9 @@
 # NES-Pong-6502-Assembly-
 
 remade pong in 6502 asm
+Written from scratch in pure 6502 assembly.
 
 # Features
-
-Written from scratch in pure 6502 assembly.
 
 Player 1: Up/Down on the NES D-Pad.
 
