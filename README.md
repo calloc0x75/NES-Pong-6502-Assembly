@@ -3,20 +3,6 @@
 remade pong in 6502 asm
 Written from scratch in pure 6502 assembly.
 
-# Features
-
-Player 1: Up/Down on the NES D-Pad.
-
-Simple but effective AI opponent.
-
-Score display for both players (resets after a win).
-
-Collision detection for paddles, ball, and walls.
-
-Center dashed line drawn using background tiles.
-
-Fully functional NES .nes ROM with proper iNES header.
-
 # Code Overview
 
 Header & Vectors – Proper iNES header and interrupt vectors.
