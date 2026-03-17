@@ -1,38 +1,40 @@
-# NES-Pong-6502-Assembly-
+# NES Pong — 6502 Assembly
 
-remade pong in 6502 asm
-Written from scratch in pure 6502 assembly.
+A fully-featured Pong clone for the NES, written from scratch in pure 6502 assembly.
 
-# Code Overview
+## Features
+- 1 Player Mode vs AI
+- 2 Player Mode for Local-Multiplayer
+- Settings such as Mode, Ball-Speed, Paddle-Size, Paddle-Speed, AI Difficulty, Ball-Spawns
+- Classic mode first to 10
+- Infinite Mode
 
-Header & Vectors – Proper iNES header and interrupt vectors.
+## Controls
+- Player 1 W/S
+- Player 2 Up/Down Arrow's
 
-Zero Page Variables – Ball position, paddle positions, velocities, scores, etc.
+## Future Improvements
 
-Game Loop – Runs every NMI, updating logic and rendering.
+- More responsive game loop (sub-frame logic or variable update rate)
+- Paddle edge hit detection refinement
+- Angle Customization/Improvements (steeper/shallower returns based on paddle/ball speed)
+- 2-player score tracking across multiple rounds
+- General Bug Fixes
 
-Paddle AI – Simple "follow the ball" logic with a dead zone.
+## Building
 
-Collision Detection – Handles paddle hits, wall bounces, and scoring.
+Requires [ca65 / ld65](https://cc65.github.io/) from the cc65 toolchain.
 
-CHR Tiles – Ball, paddles, center line, and number sprites embedded in ROM.
+```bash
+ca65 pong.asm -o pong.o
+ld65 -C nes.cfg pong.o -o pong.nes
+```
+Or use the precompiled version shipped inside this repository :D
 
-# Controls
+Compatible with any NES emulator. Tested on [Mesen](https://www.mesen.ca).
 
-Use a NES Controller 
-
-You can also use a Emulator (like Mesen, which I used) 
-https://www.mesen.ca
-
-# Compiling
-
-Compile with a 6502 Assembly Compiler like NESASM or CA65 
-
-Compiler Commands for CA65 (which I used) https://cc65.github.io/
-
-./ca65 game.asm -o game.o
-./ld65 -C nes.cfg game.o -o game.nes
-
-# Fun Fact
-
-The NES’s PPU renders backgrounds and sprites separately, so the center dashed line is drawn in the background layer, while paddles and ball are sprites. Quick Side Note the current AI used is not going to let you win ;)
+## Technical Notes
+- **PPU**: Background and sprite layers used separately — the center line is a background tile, paddles and ball are OAM sprites. Score display is written to the nametable during vblank.
+- **RNG**: Galois LFSR (`eor #$B8`) seeded with a fixed value and mixed with `frame_count` each sample for entropy.
+- **Sound**: APU programmed directly via memory-mapped registers. No audio engine.
+- **Memory**: Hot variables in zero page for fast access. SRAM at `$6000` for high score with magic byte validation.
