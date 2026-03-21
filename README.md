@@ -26,8 +26,8 @@ A fully-featured Pong clone for the NES, written from scratch in pure 6502 assem
 Requires [ca65 / ld65](https://cc65.github.io/) from the cc65 toolchain.
 
 ```bash
-ca65 pong.asm -o pong.o
-ld65 -C nes.cfg pong.o -o pong.nes
+ca65 game.asm -o game.o
+ld65 -C nes.cfg game.o -o game.nes
 ```
 Or use the precompiled version shipped inside this repository :D
 
